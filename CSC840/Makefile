@@ -1,31 +1,42 @@
 # Makefile for CSC840 Lab 15 (FINAL) - Simulated Malware Beacon
 # Targets:
-#   make easy      -> debug-friendly build (symbols, no optimization)
-#   make difficult -> stripped/optimized build (harder to reverse)
-#   make clean     -> remove build artifacts
+#   make plaintext         -> plaintext config (no encoding, easiest to reverse)
+#   make encoded           -> XOR-encoded config, symbols included
+#   make encoded_stripped  -> XOR-encoded config, stripped/optimized (harder to reverse)
+#   make clean             -> remove build artifacts
 
-CC      := gcc
-SRC     := beacon.c
+CC := gcc
 
-EASY_BIN := beacon
-HARD_BIN := beacon_stripped
+SRC := beacon.c
 
 CFLAGS_COMMON := -Wall -Wextra -Wpedantic
 LDFLAGS_COMMON :=
 
-.PHONY: all easy difficult clean
+PLAINTEXT_BIN := beacon_plaintext
+ENC_BIN       := beacon_encoded
+ENC_STRIP_BIN := beacon_encoded_stripped
 
-all: easy
+.PHONY: all plaintext encoded encoded_stripped clean
 
-easy: $(EASY_BIN)
+all: plaintext
 
-difficult: $(HARD_BIN)
+# 1) Plaintext (not encoded)
+plaintext: $(PLAINTEXT_BIN)
 
-$(EASY_BIN): $(SRC)
+$(PLAINTEXT_BIN): $(SRC)
 	$(CC) $(CFLAGS_COMMON) -O0 -g -o $@ $< $(LDFLAGS_COMMON)
 
-$(HARD_BIN): $(SRC)
-	$(CC) $(CFLAGS_COMMON) -O2 -s -o $@ $< $(LDFLAGS_COMMON)
+# 2) Encoded (not stripped)
+encoded: $(ENC_BIN)
+
+$(ENC_BIN): $(SRC)
+	$(CC) $(CFLAGS_COMMON) -O0 -g -DENCODED_CONFIG -o $@ $< $(LDFLAGS_COMMON)
+
+# 3) Encoded + stripped
+encoded_stripped: $(ENC_STRIP_BIN)
+
+$(ENC_STRIP_BIN): $(SRC)
+	$(CC) $(CFLAGS_COMMON) -O2 -s -DENCODED_CONFIG -o $@ $< $(LDFLAGS_COMMON)
 
 clean:
-	rm -f $(EASY_BIN) $(HARD_BIN)
+	rm -f $(PLAINTEXT_BIN) $(ENC_BIN) $(ENC_STRIP_BIN)
