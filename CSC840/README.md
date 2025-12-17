@@ -1,11 +1,11 @@
 # CSC840 Lab 15 (FINAL)  
-## Reverse Engineering an Obfuscated Linux Beacon
+## Reverse Engineering an Obfuscated Linux Beacon  
 
 ---
 
-## General Information
-**Author:** Taylor Marrion
-**Date:** 12/17/2025
+## General Information  
+**Author:** Taylor Marrion  
+**Date:** 12/17/2025  
 **Course:** CSC840 - Cyber Operations I  
 
 **Description:**  
