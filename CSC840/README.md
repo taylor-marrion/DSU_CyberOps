@@ -1,14 +1,14 @@
-# CSC840 Lab 15 (FINAL)  
+# CSC840 Lab 15 (FINAL)
 ## Reverse Engineering an Obfuscated Linux Beacon
 
 ---
 
 ## General Information
-**Author:** Taylor Marrion  
-**Date:** 12/17/2025  
-**Course:** CSC840 - Cyber Operations  
+**Author:** Taylor Marrion
+**Date:** 12/17/2025
+**Course:** CSC840 - Cyber Operations I
 
-**Description:**  
+**Description:**
 This project extends earlier CSC840 malware and network analysis labs by examining how simple encoding techniques are used to hide malware configuration data in Linux ELF binaries, and how reverse engineering techniques can be applied to recover that information. A safe, simulated HTTP beacon is analyzed in both plaintext and encoded forms to demonstrate how obfuscation impacts static analysis and how analysts adapt when obvious indicators are removed.
 
 ---
@@ -24,13 +24,13 @@ This project demonstrates how reverse engineering bridges the gap between tradit
 
 ## Three Main Ideas
 
-1. **Obfuscation Removes Indicators, Not Behavior**  
+1. **Obfuscation Removes Indicators, Not Behavior**
    Encoding configuration data defeats simple string-based detection, but the underlying network behavior and program structure remain observable through imports and control flow.
 
-2. **Analysts Hunt Decode Logic, Not Strings**  
+2. **Analysts Hunt Decode Logic, Not Strings**
    When configuration data is no longer readable, analysts pivot to identifying runtime decoding routines by anchoring on known behaviors such as message construction and network transmission.
 
-3. **Plaintext Must Exist Before Use**  
+3. **Plaintext Must Exist Before Use**
    Even encoded malware must decode its configuration before use, creating a window where plaintext data can be recovered through static or dynamic reverse engineering techniques.
 
 ---
